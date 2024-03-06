@@ -6,6 +6,7 @@ use App\Kardisoft\MalformedDateStringException;
 use App\Kardisoft\MedLoader;
 use App\Kardisoft\MissingMedicineDataException;
 use App\Kardisoft\MissingMedicineNameException;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,10 @@ class KardisoftTask extends Controller
                 array_push($parameters, $queryString, $queryString, $queryString);
             }
             $query = "SELECT * FROM medicines WHERE " . (implode(" AND ", $wheres));
-            $result = DB::select($query, $parameters);
+            $result = array_map(function ($row){
+                $row->med_auth_date = Carbon::parse($row->med_auth_date)->format("Y.m.d");
+                return $row;
+            }, DB::select($query, $parameters));
         }
         return response()->json($result);
     }
