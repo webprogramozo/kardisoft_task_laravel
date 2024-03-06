@@ -1,0 +1,20 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+.info-button{
+    font-size: 23px;
+    line-height: 21px;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    float: right;
+}
+
+#med_loader_modal[data-state='waiting'] .med-loader-message:not(.med-loader-message-waiting),
+#med_loader_modal[data-state='success'] .med-loader-message:not(.med-loader-message-success),
+#med_loader_modal[data-state='failure'] .med-loader-message:not(.med-loader-message-failure){
+    display: none;
+}
+
+#med_loader_modal[data-state='waiting'] .med-loader-hide-on-waiting{
+    display: none;
+}
